@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @chirp.user_id %>
+</p>
+
+<p>
+  <strong>Chirp:</strong>
+  <%= @chirp.chirp %>
+</p>
+
+<p>
+  <strong>Photo:</strong>
+  <%= @chirp.photo %>
+</p>
+
+<p>
+  <strong>File name:</strong>
+  <%= @chirp.file_name %>
+</p>
+
+<p>
+  <strong>File type:</strong>
+  <%= @chirp.file_type %>
+</p>
+
+<p>
+  <strong>Chirped at:</strong>
+  <%= @chirp.chirped_at %>
+</p>
+
+<%= link_to 'Edit', edit_chirp_path(@chirp) %> |
+<%= link_to 'Back', chirps_path %>
