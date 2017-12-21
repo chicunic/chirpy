@@ -5,6 +5,12 @@ class ChirpsController < ApplicationController
   # GET /chirps
   # GET /chirps.json
   def index
+    if current_user
+      if current_user.handle_name == nil or current_user.handle_name.length == 0
+        session[:back_to_home] = true
+        redirect_to edit_user_path(current_user)
+      end
+    end
     @chirps = Chirp.all
   end
 
@@ -26,7 +32,19 @@ class ChirpsController < ApplicationController
   # POST /chirps
   # POST /chirps.json
   def create
-    @chirp = Chirp.new(chirp_params)
+    if params[:chirp][:photo]
+      @file = params[:chirp][:photo]
+      @chirp = Chirp.new(
+        :chirp => params[:chirp][:chirp],
+        :photo => @file.read,
+        :file_name => @file.original_filename,
+        :file_type => @file.content_type,
+        :chirped_at => Time.now
+      )
+    else
+      @chirp = Chirp.new(chirp_params)
+    end
+    @chirp.user_id = current_user.id
 
     respond_to do |format|
       if @chirp.save
@@ -42,13 +60,31 @@ class ChirpsController < ApplicationController
   # PATCH/PUT /chirps/1
   # PATCH/PUT /chirps/1.json
   def update
-    respond_to do |format|
-      if @chirp.update(chirp_params)
-        format.html { redirect_to @chirp, notice: 'Chirp was successfully updated.' }
-        format.json { render :show, status: :ok, location: @chirp }
-      else
-        format.html { render :edit }
-        format.json { render json: @chirp.errors, status: :unprocessable_entity }
+    if params[:chirp][:photo]
+      @file = params[:chirp][:photo]
+      respond_to do |format|
+        if @chirp.update(
+          :chirp => params[:chirp][:chirp],
+          :photo => @file.read,
+          :file_name => @file.original_filename,
+          :file_type => @file.content_type
+        )
+          format.html { redirect_to @chirp, notice: 'Chirp was successfully updated.' }
+          format.json { render :show, status: :ok, location: @chirp }
+        else
+          format.html { render :edit }
+          format.json { render json: @chirp.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        if @chirp.update(chirp_params)
+          format.html { redirect_to @chirp, notice: 'Chirp was successfully updated.' }
+          format.json { render :show, status: :ok, location: @chirp }
+        else
+          format.html { render :edit }
+          format.json { render json: @chirp.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -61,6 +97,12 @@ class ChirpsController < ApplicationController
       format.html { redirect_to chirps_url, notice: 'Chirp was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def photo
+    @chirp = Chirp.find( params[:id] )
+    send_data @chirp.photo, :filename => @chirp.file_name,
+    :type => @chirp.file_type
   end
 
   private

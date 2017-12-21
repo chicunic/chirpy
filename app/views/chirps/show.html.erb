@@ -1,33 +1,25 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>User:</strong>
-  <%= @chirp.user_id %>
-</p>
-
-<p>
+  <%= @chirp.user.email %>
+  <br />
   <strong>Chirp:</strong>
   <%= @chirp.chirp %>
-</p>
-
-<p>
-  <strong>Photo:</strong>
-  <%= @chirp.photo %>
-</p>
-
-<p>
-  <strong>File name:</strong>
-  <%= @chirp.file_name %>
-</p>
-
-<p>
-  <strong>File type:</strong>
-  <%= @chirp.file_type %>
-</p>
-
-<p>
+  <br />
   <strong>Chirped at:</strong>
   <%= @chirp.chirped_at %>
+</p>
+
+<p>
+  <% if @chirp.photo %>
+  <strong>Photo:</strong>
+  <% if @chirp.file_type =~ /^image\/.*?(png|jpeg|gif|bmp)$/ %>
+    <%= image_tag url_for({:action => 'photo', :id => @chirp.id,
+      :filename => @chirp.file_name} ), :alt => @chirp.file_name %>
+    <% end %>
+  <% end %>
+</p>
+
+<p>
 </p>
 
 <%= link_to 'Edit', edit_chirp_path(@chirp) %> |

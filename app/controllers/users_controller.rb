@@ -42,7 +42,12 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        if session[:back_to_home]
+          session[:back_to_home] = nil
+          format.html { redirect_to chirps_path }
+        else
+          format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        end
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
