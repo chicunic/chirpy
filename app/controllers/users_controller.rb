@@ -19,6 +19,11 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if @user.face
+      @face = Face.find(@user.face.id)
+    else
+      @face = Face.new
+    end
   end
 
   # POST /users
@@ -64,6 +69,11 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def face
+    face = Face.find(params[:id])
+    send_data face.content, :filename => face.name, :type => face.content_type
   end
 
   private

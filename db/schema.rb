@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207051838) do
+ActiveRecord::Schema.define(version: 20180104074026) do
 
   create_table "chirps", force: :cascade do |t|
     t.integer "user_id"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 20171207051838) do
     t.string "file_name"
     t.string "file_type"
     t.datetime "chirped_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "faces", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "content_type"
+    t.binary "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

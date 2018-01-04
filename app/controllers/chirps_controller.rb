@@ -105,6 +105,12 @@ class ChirpsController < ApplicationController
     :type => @chirp.file_type
   end
 
+  def face
+    face = Face.find( params[:id] )
+    send_data face.content, :filename => face.name,
+    :type=>face.content_type
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chirp
