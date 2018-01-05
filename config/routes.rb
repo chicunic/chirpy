@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'follows/list'
+  put 'follows/follow/:id' => 'follows#follow', :as => 'follows_follow'
+  put 'follows/cancel/:id' => 'follows#cancel', :as => 'follows_cancel'
+
   get 'faces/register'
   put 'faces/update' => 'faces#update'
   get 'user/face' => 'users#face'

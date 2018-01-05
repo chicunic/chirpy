@@ -11,7 +11,12 @@ class ChirpsController < ApplicationController
         redirect_to edit_user_path(current_user)
       end
     end
-    @chirps = Chirp.all
+    # @chirps = Chirp.all
+    @follows = Follow.where( user_id: current_user.id )
+    @users = @follows.collect { |f| f.to_id }
+    @users << current_user.id
+    @chirps = Chirp.select{|c| @users.include?( c.user_id )}
+    @chirps = @chirps.sort_by{ |c| c[:created_at] }.reverse
   end
 
   # GET /chirps/1

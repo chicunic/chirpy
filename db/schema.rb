@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180104074026) do
+ActiveRecord::Schema.define(version: 20180105073746) do
 
   create_table "chirps", force: :cascade do |t|
     t.integer "user_id"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20180104074026) do
     t.string "name"
     t.string "content_type"
     t.binary "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "to_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
