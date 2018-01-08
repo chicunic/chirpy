@@ -32,6 +32,9 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'sprockets-rails', '~> 2.3.2', :require => 'sprockets/railtie'
+gem 'jquery-rails'
+gem 'bootstrap', '~> 4.0.0.alpha6'
 
 group :development, :test do
   gem 'rspec-rails'
