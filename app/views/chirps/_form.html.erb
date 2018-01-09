@@ -11,22 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user %>
-    <%= @chirp.user.email %>
+  <div class="form-group">
+    <%= form.text_field :chirp, id: :chirp_chirp, class: "form-control" %>
   </div>
-
-  <div class="field">
-    <%= form.label :chirp %>
-    <%= form.text_field :chirp, id: :chirp_chirp, size: "60x4" %>
+  <div class="custom-file">
+    <%= form.file_field :photo, id: :chirp_photo, class: "custom-file-input" %>
+    <%= form.label :photo, class: "custom-file-label", value: "Please choose a photo or video" %>
   </div>
-
-  <div class="field">
-    <%= form.label :photo %>
-    <%= form.file_field :photo, id: :chirp_photo %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div style="padding-top: 16px;">
+    <%= form.submit class:"btn btn-block", style: "background-color: pink;" %>
   </div>
 <% end %>

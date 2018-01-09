@@ -11,27 +11,25 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :email %>
-    <%= form.text_field :email, id: :user_email %>
+    <%= form.text_field :email, id: :user_email, class: "form-control", placeholder: "Enter email" %>
   </div>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :handle_name %>
-    <%= form.text_field :handle_name, id: :user_handle_name %>
+    <%= form.text_field :handle_name, id: :user_handle_name, class: "form-control", placeholder: "Enter your name" %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit class: "btn btn-primary btn-block" %>
   </div>
 <% end %>
 
 <hr />
 <%= form_for @face, :url => "/faces/update",
     :html => {:multipart => true}, :method => :put do %>
-  <div class="field">
-    Face Photo:
-    <%= file_field :file, :upload %>
+  <div class="custom-file">
+    <%= file_field :file, :upload, class: "custom-file-input" %>
+    <label class="custom-file-label" for="file_upload">Choose a picture</label>
   </div>
-  <div><%= submit_tag "Upload Photo" %></div>
+  <div><%= submit_tag "Upload Photo", class: "btn btn-primary btn-block" %></div>
 <% end %>

@@ -1,21 +1,42 @@
-<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-  <!-- Navbar content -->
-</nav>
+<!-- navbar -->
 <% if current_user %>
-  <div align="right">
-    Hello, <%= current_user.handle_name %><br />
-    <%= link_to('Sign Out', destroy_user_session_path, :method => :delete) %><br />
-    <%= link_to 'Edit Info', edit_user_path( :id => current_user.id ) %><br />
-    <%= link_to 'Change Password', edit_user_registration_path %>
-  </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white" style="">
+    <a class="navbar-brand" href="#">Welcome to chirpy, <%= current_user.handle_name %>!</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to 'Edit Info', edit_user_path( :id => current_user.id ), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Change Password', edit_user_registration_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to('Sign Out', destroy_user_session_path, :method => :delete, class: "nav-link") %>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Language
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#ch">中文</a>
+            <a class="dropdown-item" href="#en">English</a>
+            <a class="dropdown-item" href="#ja">日本語</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
 <% end %>
 
-<div class="container">
-  <div class="chirp border-right-0 border-bottom-0 border-left-0 border border-primary bg-light">
-    <%= link_to 'New Chirp', new_chirp_path %>
+<div class="container" style="padding-top: 10px;">
+  <!-- new chirp -->
+  <div class="chirp border-top-0 border-right-0 border-bottom-0 border-left-0 bg-white"
+    style="padding: 10px;">
+    <%= render 'form', chirp: @chirp %>
   </div>
+  <!-- list chirps -->
   <% @chirps.each do |chirp| %>
-    <div class="chirp border-right-0 border-bottom-0 border-left-0 border border-primary bg-light">
+    <div class="chirp border-right-0 border-bottom-0 border-left-0 mt-1 bg-white">
       <% if chirp.user.face %>
         <% face = chirp.user.face %>
         <% if face.content_type =~ /^image\/.*?(png|jpeg|gif)$/ %>
@@ -34,18 +55,22 @@
         <div class="text"><%= chirp.chirp %></div>
         <div>
           <% if chirp.photo %>
-              <% if chirp.file_type =~ /^image\/.*?(png|jpeg|gif)$/ %>
-                <%= image_tag url_for({:action => 'photo', :id=> chirp.id,
-                  :filename => chirp.file_name}), :alt => chirp.file_name, :class => 'photo'%>
-                <% end %>
+            <% if chirp.file_type =~ /^image\/.*?(png|jpeg|gif)$/ %>
+              <%= image_tag url_for({:action => 'photo', :id=> chirp.id,
+                :filename => chirp.file_name}), :alt => chirp.file_name, :class => 'photo'%>
+            <% elsif chirp.file_type =~ /^video\/.*?(mp4)$/ %>
+              <%= video_tag url_for({:action => 'photo', :id=> chirp.id,
+                :filename => chirp.file_name}), :alt => chirp.file_name, :class => 'photo'%>
+            <% end %>
           <% end %>
         </div>
       </div>
-      <div class="button row">
-        <div class='col'><%= link_to 'Show', chirp %></div>
-        <div class='col'><%= link_to 'Edit', edit_chirp_path(chirp) %></div>
-        <div class='col'><%= link_to 'Destroy', chirp, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <div class="row button">
+        <div class='col'><%= link_to 'Show', chirp, class: "text-pink" %></div>
+        <div class='col'><%= link_to 'Edit', edit_chirp_path(chirp), class: "text-pink" %></div>
+        <div class='col'><%= link_to 'Destroy', chirp, class: "text-pink", method: :delete, data: { confirm: 'Are you sure?' } %></div>
       </div>
+    </div>
   <% end %>
 </div>
 

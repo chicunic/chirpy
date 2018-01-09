@@ -17,6 +17,8 @@ class ChirpsController < ApplicationController
     @users << current_user.id
     @chirps = Chirp.select{|c| @users.include?( c.user_id )}
     @chirps = @chirps.sort_by{ |c| c[:created_at] }.reverse
+    @chirp = Chirp.new
+    @chirp.user_id = current_user.id
   end
 
   # GET /chirps/1
