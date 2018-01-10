@@ -1,11 +1,33 @@
-<h1>Editing User</h1>
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <a class="navbar-brand" href="#">Edit Info</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto justify-content-end">
+      <li class="nav-item">
+        <%= link_to 'Show', @user, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Back', chirps_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Language
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#ch">中文</a>
+          <a class="dropdown-item" href="#en">English</a>
+          <a class="dropdown-item" href="#ja">日本語</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
 
 <% if session[:back_to_home] %>
   Welcome! Now you joined to our Chirps Site.<br />
   First, register your <font color="blue">Handle Name</font>!<br />
 <% end %>
 
-<%= render 'form', user: @user %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', chirps_path %>
+<div class="container" style="padding-top: 20px;">
+  <%= render 'form', user: @user %>
+</div>

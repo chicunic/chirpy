@@ -1,9 +1,9 @@
 <!-- navbar -->
 <% if current_user %>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white" style="">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <a class="navbar-brand" href="#">Welcome to chirpy, <%= current_user.handle_name %>!</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto justify-content-end">
         <li class="nav-item">
           <%= link_to 'Edit Info', edit_user_path( :id => current_user.id ), class: "nav-link" %>
         </li>
@@ -51,7 +51,7 @@
       <% end %>
       <div class="chirp_right">
         <div class="user font-weight-bold"><%= chirp.user_id %></div>
-        <div class="chirped_at"><%= chirp.chirped_at %></div>
+        <div class="chirped_at text-pink"><%= chirp.chirped_at %></div>
         <div class="text"><%= chirp.chirp %></div>
         <div>
           <% if chirp.photo %>
@@ -65,13 +65,11 @@
           <% end %>
         </div>
       </div>
-      <div class="row button">
-        <div class='col'><%= link_to 'Show', chirp, class: "text-pink" %></div>
-        <div class='col'><%= link_to 'Edit', edit_chirp_path(chirp), class: "text-pink" %></div>
-        <div class='col'><%= link_to 'Destroy', chirp, class: "text-pink", method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <div class="row button text-pink">
+        <div class='col'><%= link_to 'Show', chirp %></div>
+        <div class='col'><%= link_to 'Edit', edit_chirp_path(chirp) %></div>
+        <div class='col'><%= link_to 'Destroy', chirp, method: :delete, data: { confirm: 'Are you sure?' } %></div>
       </div>
     </div>
   <% end %>
 </div>
-
-

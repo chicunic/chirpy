@@ -1,35 +1,56 @@
-<h1>Follows#list</h1>
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <a class="navbar-brand" href="#">Follow List</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto justify-content-end">
+      <li class="nav-item">
+        <%= link_to 'Back', chirps_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Language
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#ch">中文</a>
+          <a class="dropdown-item" href="#en">English</a>
+          <a class="dropdown-item" href="#ja">日本語</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-<table border="1">
 <% @users.each do |user| %>
-  <tr>
-    <td>
+  <div class="card border-pink mb-3 text-center" style="max-width: 18rem;">
+    <div class="card">
       <% if user.face %>
         <% if user.face.content_type =~ /^image\/.*?(png|jpeg|gif)$/ %>
           <%= image_tag url_for({:controller => 'chirps',
               :action => 'face', :id=> user.face.id,
-              :filename => user.face.name}), :alt => user.face.name
+              :filename => user.face.name}), :alt => user.face.name,
+              class: "card-img-top"
             %>
         <% else %>
-          <%= image_tag 'default_face.png', :alt => user.face.name %>
+          <%= image_tag 'default_face.png', :alt => user.face.name, class: "card-img-top" %>
         <% end %>
       <% else %>
-        <%= image_tag 'default_face.png', :alt => 'No Name' %>
+        <%= image_tag 'default_face.png', :alt => 'No Name', class: "card-img-top" %>
       <% end %>
-    </td>
-    <td><%= user.handle_name %></td>
-    <td><%= user.email %></td>
-    <td>
-      <% if @follows && (follow = @follows.find {|follow| follow.to_id == user.id }) %>
-        <%= form_tag "/follows/cancel/"+follow.id.to_s, :method => 'put' do %>
-          <%= submit_tag "Stop Follow", :name => "Cancel" %>
-        <% end %>
-      <% else %>
-        <%= form_tag "/follows/follow/"+user.id.to_s, :method => 'put' do %>
-          <%= submit_tag "Follow", :name => "Follow" %>
-        <% end %>
-      <% end %>
-    </td>
-  </tr>
+      <div class="card-body">
+        <h5 class="card-title"><%= user.handle_name %></h5>
+        <p class="card-text"><%= user.email %></p>
+        <p class="card-text">
+          <% if @follows && (follow = @follows.find {|follow| follow.to_id == user.id }) %>
+            <%= form_tag "/follows/cancel/"+follow.id.to_s, :method => 'put' do %>
+              <%= submit_tag "Stop Follow", :name => "Cancel", class: "btn btn-pink" %>
+            <% end %>
+          <% else %>
+            <%= form_tag "/follows/follow/"+user.id.to_s, :method => 'put' do %>
+              <%= submit_tag "Follow", :name => "Follow", class: "btn btn-pink" %>
+            <% end %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
 <% end %>
-</table>

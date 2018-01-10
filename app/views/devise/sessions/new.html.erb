@@ -1,3 +1,23 @@
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-pink" style="">
+  <a class="navbar-brand" href="#">Welcome to chirpy!</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Language
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#ch">中文</a>
+          <a class="dropdown-item" href="#en">English</a>
+          <a class="dropdown-item" href="#ja">日本語</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- log_in -->
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-signin">
     <h2 class="form-signin-heading">Please sign in</h2>
@@ -12,9 +32,11 @@
       </div>
     <% end -%>
     <div class="actions">
-      <%= f.submit "Sign in", class: "btn btn-lg btn-primary btn-block" %>
+      <%= f.submit "Sign in", class: "btn btn-lg btn-pink btn-block" %>
     </div>
   </div>
 <% end %>
+<div class="text-pink">
+  <%= render "devise/shared/links" %>
+</div>
 
-<%= render "devise/shared/links" %>

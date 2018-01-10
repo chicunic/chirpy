@@ -15,10 +15,10 @@
     <%= form.text_field :chirp, id: :chirp_chirp, class: "form-control" %>
   </div>
   <div class="custom-file">
-    <%= form.file_field :photo, id: :chirp_photo, class: "custom-file-input" %>
-    <%= form.label :photo, class: "custom-file-label", value: "Please choose a photo or video" %>
+    <%= form.file_field :photo, id: :chirp_photo,  placeholder: "Please choose a photo or video" %>
+    <%= form.label :photo, class: "custom-file-label", for: "chirp_photo" %>
   </div>
-  <div style="padding-top: 16px;">
-    <%= form.submit class:"btn btn-block", style: "background-color: pink;" %>
+  <div style="padding-top: 6px;">
+    <%= form.submit class:"btn btn-pink btn-block" %>
   </div>
 <% end %>

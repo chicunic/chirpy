@@ -13,11 +13,19 @@
  */
 @import 'bootstrap';
 
-/* sign_in */
+/* default */
 body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #eee;
+}
+
+.bg-pink {
+  background-color: #fff0f5 !important;
+}
+
+.text-pink {
+  color: #d65b84 !important;
 }
 
 nav {
@@ -26,6 +34,35 @@ nav {
   border-width: 1px;
 }
 
+.btn-pink {
+  color: #fff;
+  background-color: #f58ea8;
+  border-color: #f58ea8;
+}
+
+.btn-pink:hover {
+  color: #fff;
+  background-color: #d65b84;
+  border-color: #d65b84;
+}
+
+a {
+  color: inherit;
+}
+
+/*when a value is selected, this class removes the content */
+.custom-file-control.selected:lang(en)::after {
+  content: "" !important;
+}
+
+.custom-file {
+  overflow: hidden;
+}
+.custom-file-control {
+  white-space: nowrap;
+}
+
+/* sign_in */
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -86,8 +123,8 @@ nav {
 
 .chirped_at {
   padding-left: 20px;
-  color: #f58ea8;
 }
+
 .text {
   clear: both;
 }
@@ -101,8 +138,4 @@ nav {
 .button {
   text-align: center;
   clear: both;
-}
-
-.text-pink {
-  color: #f58ea8;
 }

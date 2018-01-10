@@ -1,6 +1,31 @@
-<h1>Editing Chirp</h1>
-
-<%= render 'form', chirp: @chirp %>
-
-<%= link_to 'Show', @chirp %> |
-<%= link_to 'Back', chirps_path %>
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <a class="navbar-brand" href="#">Edit Info</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto justify-content-end">
+      <li class="nav-item">
+        <%= link_to 'Show', @chirp, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Back', chirps_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Language
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#ch">中文</a>
+          <a class="dropdown-item" href="#en">English</a>
+          <a class="dropdown-item" href="#ja">日本語</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container" style="padding-top: 10px;">
+  <!-- edit chirp -->
+  <div class="chirp border-top-0 border-right-0 border-bottom-0 border-left-0 bg-white"
+    style="padding: 10px;">
+    <%= render 'form', chirp: @chirp %>
+  </div>
+</div>
