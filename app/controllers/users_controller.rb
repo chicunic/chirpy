@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :album, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -24,6 +24,13 @@ class UsersController < ApplicationController
     else
       @face = Face.new
     end
+  end
+
+  # GET /users/1/album
+  def album
+    @user = User.find(params[:id])
+    @chirps = Chirp.select{|c| (c.user_id == @user.id)}
+    @chirps = @chirps.sort_by{ |c| c[:created_at] }.reverse
   end
 
   # POST /users

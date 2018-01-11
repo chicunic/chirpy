@@ -1,26 +1,29 @@
 <!-- navbar -->
 <% if current_user %>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <a class="navbar-brand" href="#">Welcome to chirpy, <%= current_user.handle_name %>!</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <a class="navbar-brand" href="#"><%= t 'welcome,' %><%= current_user.handle_name %></a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto justify-content-end">
         <li class="nav-item">
-          <%= link_to 'Edit Info', edit_user_path( :id => current_user.id ), class: "nav-link" %>
+          <%= link_to (t 'album'), album_user_path( :id => current_user.id ), class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to 'Change Password', edit_user_registration_path, class: "nav-link" %>
+          <%= link_to (t 'edit_info'), edit_user_path( :id => current_user.id ), class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to('Sign Out', destroy_user_session_path, :method => :delete, class: "nav-link") %>
+          <%= link_to (t 'change_password'), edit_user_registration_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to (t 'sign_out'), destroy_user_session_path, :method => :delete, class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Language
+            <%= t 'language' %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#ch">中文</a>
-            <a class="dropdown-item" href="#en">English</a>
-            <a class="dropdown-item" href="#ja">日本語</a>
+            <a class="dropdown-item" href="?locale=zh">中文</a>
+            <a class="dropdown-item" href="?locale=en">English</a>
+            <a class="dropdown-item" href="?">日本語</a>
           </div>
         </li>
       </ul>
@@ -50,7 +53,7 @@
         <%= image_tag 'default_face.png', :alt => 'No Photo', :class => 'face rounded-circle' %>
       <% end %>
       <div class="chirp_right">
-        <div class="user font-weight-bold"><%= chirp.user_id %></div>
+        <div class="user font-weight-bold"><%= chirp.user.handle_name %></div>
         <div class="chirped_at text-pink"><%= chirp.chirped_at %></div>
         <div class="text"><%= chirp.chirp %></div>
         <div>
@@ -66,9 +69,11 @@
         </div>
       </div>
       <div class="row button text-pink">
-        <div class='col'><%= link_to 'Show', chirp %></div>
-        <div class='col'><%= link_to 'Edit', edit_chirp_path(chirp) %></div>
-        <div class='col'><%= link_to 'Destroy', chirp, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+        <div class='col'><%= link_to (t 'show'), chirp %></div>
+        <% if chirp.user_id == current_user.id %>
+          <div class='col'><%= link_to (t 'edit'), edit_chirp_path(chirp) %></div>
+          <div class='col'><%= link_to (t 'destroy'), chirp, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+        <% end %>
       </div>
     </div>
   <% end %>

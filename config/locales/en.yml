@@ -31,3 +31,18 @@
 
 en:
   hello: "Hello world"
+  welcome,: "Welcome to chirpy, "
+  album: "Album"
+  edit_info: "Edit Info"
+  change_password: "Change Password"
+  sign_out: "Sign Out"
+  language: "Language"
+  new_chirp: "New Chirp"
+  show: "Show"
+  edit: "Edit"
+  destroy: "Destroy"
+  welcome: "Welcome to chirpy"
+  please_sign_in: "Please sign in"
+  email_address: "Email address"
+  password: "Password"
+  sign_in: "Sign in"

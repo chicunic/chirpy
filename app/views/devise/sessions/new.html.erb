@@ -1,16 +1,16 @@
 <!-- navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-pink" style="">
-  <a class="navbar-brand" href="#">Welcome to chirpy!</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-pink fixed-top">
+  <a class="navbar-brand" href="#"><%= t 'welcome' %></a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Language
+          <%= t 'language' %>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#ch">中文</a>
-          <a class="dropdown-item" href="#en">English</a>
-          <a class="dropdown-item" href="#ja">日本語</a>
+          <a class="dropdown-item" href="?locale=zh">中文</a>
+          <a class="dropdown-item" href="?locale=en">English</a>
+          <a class="dropdown-item" href="?">日本語</a>
         </div>
       </li>
     </ul>
@@ -20,11 +20,11 @@
 <!-- log_in -->
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-signin">
-    <h2 class="form-signin-heading">Please sign in</h2>
+    <h2 class="form-signin-heading"><%= t "please_sign_in" %></h2>
     <%= f.label :email, class: "sr-only" %>
-    <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email address" %>
+    <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: (t "email_address") %>
     <%= f.label :password, class: "sr-only" %>
-    <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password" %>
+    <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: (t "password") %>
     <% if devise_mapping.rememberable? -%>
       <div class="checkbox">
         <%= f.check_box :remember_me %>
@@ -32,7 +32,7 @@
       </div>
     <% end -%>
     <div class="actions">
-      <%= f.submit "Sign in", class: "btn btn-lg btn-pink btn-block" %>
+      <%= f.submit (t "sign_in"), class: "btn btn-lg btn-pink btn-block" %>
     </div>
   </div>
 <% end %>

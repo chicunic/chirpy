@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'follows/list'
   put 'follows/follow/:id' => 'follows#follow', :as => 'follows_follow'
   put 'follows/cancel/:id' => 'follows#cancel', :as => 'follows_cancel'
@@ -12,7 +13,11 @@ Rails.application.routes.draw do
   get 'chirps', :to => 'chirps#index', :as => :user_root
   get 'chirps/photo' => 'chirps#photo'
 
-  resources :users
+  resources :users do
+    member do
+      get 'album'
+    end
+  end
   resources :chirps
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root :to => 'chirps#index'

@@ -72,6 +72,14 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe "GET #album" do
+    it "returns a success response" do
+      user = User.create! valid_attributes
+      get :album, params: {id: user.to_param}, session: valid_session
+      expect(response).to be_success
+    end
+  end
+
   describe "POST #create" do
     context "with valid params" do
       it "creates a new User" do

@@ -1,7 +1,7 @@
 class ChirpsController < ApplicationController
   before_action :set_chirp, only: [:show, :edit, :update, :destroy]
 
-  before_action :authenticate_user!, only: [:index, :show, :new, :create, :edit, :destroy, :update, :photo]
+  before_action :authenticate_user!, only: [:index, :show, :new, :create, :edit, :album, :destroy, :update, :photo]
   # GET /chirps
   # GET /chirps.json
   def index
@@ -17,6 +17,7 @@ class ChirpsController < ApplicationController
     @users << current_user.id
     @chirps = Chirp.select{|c| @users.include?( c.user_id )}
     @chirps = @chirps.sort_by{ |c| c[:created_at] }.reverse
+    @chirps.select()
     @chirp = Chirp.new
     @chirp.user_id = current_user.id
   end
